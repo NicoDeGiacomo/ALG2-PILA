@@ -39,34 +39,40 @@ void pila_destruir(pila_t *pila){
 }
 
 bool pila_esta_vacia(const pila_t *pila){
-	return pila->cantidad == 0;
+	return !(pila->cantidad);
 }
 
 bool pila_apilar(pila_t* pila, void* valor){
 	//Si ya esta al maximo, redimensiono antes de apilar
-	if (pila->cantidad == pila->capacidad)
+	if (pila->cantidad >= pila->capacidad)
 		if (!redimensionar(pila, pila->capacidad+SIZE))
 			return false;
-	pila->datos[pila->cantidad-1] = valor;
+	pila->datos[pila->cantidad] = valor;
+	pila->cantidad++;
 	return true;
 }
 
 void* pila_ver_tope(const pila_t *pila){
-	return malloc(sizeof(pila_t));
+	if (!(pila->cantidad))
+		return NULL;
+	return pila->datos[pila->cantidad-1];
 }
 
 void* pila_desapilar(pila_t *pila){
-	void* dato = pila->datos[pila->cantidad-1];
+	if (!(pila->cantidad))
+		return NULL;
 	pila->cantidad--;
+	void* dato = pila->datos[pila->cantidad];
 	//Si baja del minimo, redimensiono luego de desapilar
-	if (pila->cantidad == pila->capacidad / REALLOC_WHEN)
-		redimensionar(pila, pila->capacidad / REALLOC_TO);
+	if (pila->cantidad <= (pila->capacidad / REALLOC_WHEN))
+		redimensionar(pila, (pila->capacidad / REALLOC_TO));
 	return dato;
 }
 
 bool redimensionar(pila_t* pila, size_t size){
-	pila = realloc(pila, size);
-	if (!pila)
+	pila->datos = realloc(pila->datos, size*sizeof(void*));
+	if (!pila->datos)
 		return false;
+	pila->capacidad = size;
 	return true;
 }
