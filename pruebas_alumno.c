@@ -30,7 +30,6 @@ void pruebas_pila_alumno() {
 
     /* Prueba redimension */
     pila = pila_crear();
-    //TODO: ESTE SIZE EN CONSTANTE?
     for (int i = 0; i <= 15; ++i)
         print_test("pila_apilar es true", pila_apilar(pila, &valor1) == true);
     for (int i = 0; i <= 15; ++i)
