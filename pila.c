@@ -44,8 +44,8 @@ bool pila_esta_vacia(const pila_t *pila){
 
 bool pila_apilar(pila_t* pila, void* valor){
 	//Si ya esta al maximo, redimensiono antes de apilar
-	if (pila->cantidad >= pila->capacidad)
-		if (!redimensionar(pila, pila->capacidad*REALLOC_TO))
+	if (pila->cantidad == pila->capacidad-1)
+		if (!redimensionar(pila, (pila->capacidad)*REALLOC_TO))
 			return false;
 	pila->datos[pila->cantidad] = valor;
 	pila->cantidad++;
@@ -70,9 +70,10 @@ void* pila_desapilar(pila_t *pila){
 }
 
 bool redimensionar(pila_t* pila, size_t size){
-	pila->datos = realloc(pila->datos, size*sizeof(void*));
-	if (!pila->datos)
+	void** tmp = realloc(pila->datos, size*sizeof(void*));
+	if (!tmp)
 		return false;
 	pila->capacidad = size;
+	pila->datos = tmp;
 	return true;
 }

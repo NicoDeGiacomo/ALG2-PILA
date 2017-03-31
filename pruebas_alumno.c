@@ -30,9 +30,9 @@ void pruebas_pila_alumno() {
 
     /* Prueba redimension */
     pila = pila_crear();
-    for (int i = 0; i <= 15; ++i)
+    for (int i = 0; i <= 21; ++i)
         print_test("pila_apilar es true", pila_apilar(pila, &valor1) == true);
-    for (int i = 0; i <= 15; ++i)
+    for (int i = 0; i <= 21; ++i)
         print_test("pila_desapilar devuelve el tope", pila_desapilar(pila) == &valor1);
     print_test("pila_ver_tope es NULL", pila_ver_tope(pila) == NULL);
     print_test("pila_desapilar es NULL", pila_desapilar(pila) == NULL);
