@@ -4,7 +4,7 @@
 #define SIZE 10 //Capacidad inicial de la pila
 //TODO: poner esto como porcentaje y pasar a size_t al multiplicar
 #define REALLOC_WHEN 4 //Porcentage al cual la capacidad de la pila se reduce
-#define REALLOC_TO 2 //Porcentaje de reduccion de la capacidad de la pila
+#define REALLOC_TO 2 //Porcentaje de reduccion y ampliacion de la capacidad de la pila
 
 /* Definición del struct pila proporcionado por la cátedra.
  */
@@ -45,7 +45,7 @@ bool pila_esta_vacia(const pila_t *pila){
 bool pila_apilar(pila_t* pila, void* valor){
 	//Si ya esta al maximo, redimensiono antes de apilar
 	if (pila->cantidad >= pila->capacidad)
-		if (!redimensionar(pila, pila->capacidad+SIZE))
+		if (!redimensionar(pila, pila->capacidad*REALLOC_TO))
 			return false;
 	pila->datos[pila->cantidad] = valor;
 	pila->cantidad++;
