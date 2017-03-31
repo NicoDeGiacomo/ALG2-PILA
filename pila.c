@@ -1,3 +1,7 @@
+//Nombre: Nicolás De Giácomo
+//Padron: 99702
+//Corrector: Matias C
+
 #include "pila.h"
 #include <stdlib.h>
 
