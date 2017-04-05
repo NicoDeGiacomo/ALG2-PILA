@@ -83,3 +83,5 @@ fabric.properties
 *.txt
 *.xml
 *.iml
+/cmake-build-debug/
+/.idea/
